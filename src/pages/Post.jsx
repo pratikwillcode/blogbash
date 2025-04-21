@@ -21,8 +21,9 @@ export default function Post() {
 
     const userData = useSelector((state) => state.userData);
     const profileDetails = useSelector((state) => state.profileDetails);
+    const isAdmin = userData?.labels?.includes('admin');
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = isAdmin || (post && userData && post.userId === userData.$id);
     const [isLiked, setIsLiked] = useState(false);
     const [isDisliked, setIsDisliked] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.screen.width);

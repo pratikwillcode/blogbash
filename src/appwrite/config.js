@@ -4,11 +4,13 @@ import {
     ID,
     Databases,
     Storage,
-    Query
+    Query, 
+    Functions
 } from 'appwrite';
 
 export class Service {
     client = new Client();
+    functions = new Functions(this.client);
     databases;
     bucket;
 
@@ -215,6 +217,80 @@ export class Service {
             console.log("Update Profile Failed" + e.message);
         }
     }
+
+    fetchUsers = async () => {
+        try {
+          const response = await this.databases.listDocuments(conf.appwriteDatabaseId, conf.appwriteProfileCollectionId);
+          return response.documents;
+        // allPosts.documents = allPosts.documents.filter(post => post.status === "active")
+        return allPosts
+        } catch (error) {
+          console.error("Error fetching users:", error);
+          throw error;
+        }
+      };
+
+    blockUser = async (userId) => {
+        try {
+          // Implement block logic here
+          console.log(`Blocking user with ID: ${userId}`);
+          return true;
+        } catch (error) {
+          console.error("Error blocking user:", error);
+          throw error;
+        }
+      };
+      
+    unblockUser = async (userId) => {
+        try {
+          // Implement unblock logic here
+          console.log(`Unblocking user with ID: ${userId}`);
+          return true;
+        } catch (error) {
+          console.error("Error unblocking user:", error);
+          throw error;
+        }
+      };
+
+    async deleteUserProfile(userId) {
+        try {
+            await this.databases.deleteDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteProfileCollectionId,
+                userId
+            );
+            return true;
+        } catch (e) {
+            console.log("Delete User Profile Failed" + e.message);
+            return false;
+        }
+    }
+
+    deleteUserViaFunction = async (userId) => {
+        try {
+          const payload = JSON.stringify({ userId });
+      
+          const response = await this.functions.createExecution(
+            conf.appwriteDeleteUserFunctionId,           // 1st argument: functionId
+            JSON.stringify({ userId: userId }),                  // 2nd argument: body
+            false,                                       // 3rd argument: async (false means synchronous execution)
+            "/delete-user",                              // 4th argument: xpath (path)
+            "POST",                                      // 5th argument: method
+            { "x-appwrite-key": import.meta.env.VITE_APPWRITE_ADMIN_API_KEY } // 6th argument: headers
+          );
+          
+          
+          
+      
+          const parsedResponse = JSON.parse(response.responseBody);
+          return parsedResponse;
+        } catch (error) {
+          console.error("Error deleting user via function:", error);
+          throw error;
+        }
+      };
+
+
 
 }
 

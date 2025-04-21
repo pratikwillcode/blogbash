@@ -27,7 +27,11 @@ function EditPost() {
     <div className=''>
         <Container>
         <div className=' flex items-center gap-1 text-sm lg:px-10 px-7 py-8 '>
-                            <Link to='/'>Home</Link> <span className=' font-thin text-sm pt-0.5'><GrFormNext className=' font-thin' /></span> <Link to={`/edit-post/${slug}`}>Edit Post</Link>
+                            <Link to='/'>Home</Link>
+                            <span className=' font-thin text-sm pt-0.5'>
+                                <GrFormNext className=' font-thin' />
+                            </span>
+                             <Link to={`/edit-post/${slug}`}>Edit Post</Link>
 
                         </div>
             <PostForm post={post} />

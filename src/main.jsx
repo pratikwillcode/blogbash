@@ -16,6 +16,9 @@ import Profile from './pages/Profile.jsx'
 import MyPosts from './pages/MyPosts.jsx'
 import ContactUs from './pages/ContactUs.jsx'
 import About from './pages/About.jsx'
+import Admin from './pages/Admin.jsx'
+import adminRoutes from "./routes/adminRoutes";
+
 
 const router = createBrowserRouter([
   {
@@ -79,6 +82,15 @@ const router = createBrowserRouter([
             ),
         },
         {
+            path: "/admin",
+            element: (
+                <AuthLayout authentication>
+                    {" "}
+                    <Admin />
+                </AuthLayout>
+            ),
+        },
+        {
             path: "/edit-post/:slug",
             element: (
                 <AuthLayout authentication>
@@ -102,7 +114,8 @@ const router = createBrowserRouter([
         {
             path: "/logout",
             element: <LogoutBtn />,
-        }
+        },
+        adminRoutes,
     ],
 },
 ])

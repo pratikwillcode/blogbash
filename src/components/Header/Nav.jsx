@@ -8,16 +8,18 @@ import LogoutBtn from './LogoutBtn'
 
 function Nav() {
     const authStatus = useSelector(state => state.status)
+    const isAdmin = useSelector(state => state?.userData?.labels?.includes('admin'));
     const navItems = [
         { name: 'Home', path: '/', active: true },
+        { name: 'My Posts', path: '/my-posts', active: authStatus},
+        { name: 'All Posts', path: '/all-posts', active: authStatus },
+        { name: 'Add Post', path: '/add-post', active: authStatus },
         { name: 'Contact', path: '/contact-us', active: true},
         {name: 'About', path: '/about', active: true},
         { name: 'Login', path: '/login', active: !authStatus },
         { name: 'Sign Up', path: '/signup', active: !authStatus },
-        { name: 'All Posts', path: '/all-posts', active: authStatus },
-        { name: 'My Posts', path: '/my-posts', active: authStatus},
-        { name: 'Add Post', path: '/add-post', active: authStatus },
         { name: 'Profile', path: '/profile', active: authStatus },
+        { name: 'Admin', path: '/Admin', active: authStatus && isAdmin },
 
     ]
 
