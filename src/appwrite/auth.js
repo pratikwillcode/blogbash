@@ -102,7 +102,23 @@ class AuthService {
         }
     }
 
-   
+    async createRecovery(email, redirectUrl) {
+        try {
+            return await this.account.createRecovery(email, redirectUrl);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    async updateRecovery(userId, secret, password, confirmPassword) {
+        try {
+
+            return await this.account.updateRecovery(userId, secret, password, confirmPassword);
+        }
+        catch (e) {
+            throw e;
+        }
+    }
 
 }
 
