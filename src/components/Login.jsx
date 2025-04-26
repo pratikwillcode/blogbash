@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { login as authLogin, setProfileDetails } from '../store/authSlice'
 import { Logo, Input, Button } from './index'
 import { useDispatch } from 'react-redux'
@@ -118,6 +118,12 @@ function Login() {
                                 {...register('password', { required: false })}
                             />
                             <span className='text-red-500'>{passwordError}</span>
+                            {/* Forgot Password link */}
+                                <div className="text-right">
+                                  <NavLink to="/forgot-password" className="text-blue-500 text-sm hover:underline">
+                                    Forgot Password?
+                                  </NavLink>
+                                </div>
                             <div className=' flex items-center justify-center'><Button type="submit" className=" px-8">Sign In</Button>
                             </div>
                             <span className='text-red-500 w-full  flex  justify-center'>{error}</span>
