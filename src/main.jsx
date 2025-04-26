@@ -18,6 +18,8 @@ import ContactUs from './pages/ContactUs.jsx'
 import About from './pages/About.jsx'
 import Admin from './pages/Admin.jsx'
 import adminRoutes from "./routes/adminRoutes";
+import ForgotPassword from './pages/ForgotPassword.jsx'
+import ResetPassword from './pages/ResetPassword.jsx'
 
 
 const router = createBrowserRouter([
@@ -114,6 +116,14 @@ const router = createBrowserRouter([
         {
             path: "/logout",
             element: <LogoutBtn />,
+        },
+        {
+            path: "/forgot-password",
+            element: <ForgotPassword />
+        },
+        {
+            path:"/reset-password",
+            element: <ResetPassword/>
         },
         adminRoutes,
     ],
